@@ -1,5 +1,5 @@
 const { mkdir, readdir, copyFile } = require('node:fs/promises');
-const { extname, join } = require('path');
+const { join } = require('path');
 
 const source = join(__dirname, 'files');
 const dist = join(__dirname, 'files-copy')
