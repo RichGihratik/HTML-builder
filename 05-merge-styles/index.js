@@ -1,5 +1,5 @@
 const { createWriteStream, createReadStream } = require('fs');
-const { mkdir, readdir } = require('node:fs/promises');
+const { readdir } = require('node:fs/promises');
 const { extname, join } = require('path');
 
 const source = join(__dirname, 'styles');
