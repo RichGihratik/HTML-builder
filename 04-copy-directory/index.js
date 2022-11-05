@@ -15,7 +15,7 @@ async function main() {
         }
     ))
     .filter(file => file.isFile())
-    .map((file) => copyFile(join(source, file.name), join(dist, file.name)));
+    .forEach((file) => copyFile(join(source, file.name), join(dist, file.name)));
 }
 
 main();
