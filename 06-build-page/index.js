@@ -81,6 +81,7 @@ function replaceTags(template, componentsMap) {
 }
 
 async function bundleHtml() {
+    console.log('Bundle html...');
     let writeStream = createWriteStream(distHtmlBundle,  'utf8');
 
     let template = await readFile(templatePath, 'utf8');
@@ -94,6 +95,7 @@ async function bundleHtml() {
 // ==============================
 
 async function copyAssets() {
+    console.log('Copying assets...');
     let copyPath = async (subDir) => {
         let internalPath = join(assetsPath, subDir);
         let files = (await readdir(internalPath, { encoding: "utf8", withFileTypes: true }));
@@ -105,7 +107,6 @@ async function copyAssets() {
             else if (file.isDirectory()) {
                 let dir = join(subDir, file.name);
                 await mkdir(join(distAssets, dir));
-                
                 await copyPath(dir);
             }
         }
@@ -119,11 +120,13 @@ async function copyAssets() {
 // ==============================
 
 async function bundleCss() {
+    console.log('Bundle css...');
     let writeStream = createWriteStream(distCssBundle, 'utf8');
 
-    (await readdir( stylesPath, { encoding: "utf8", withFileTypes: true}))
+    (await readdir( stylesPath, { encoding: "utf8", withFileTypes: true }))
     .forEach(file => {
         if (file => file.isFile() && extname(file.name) === '.css') 
-            createReadStream(join(stylesPath, file.name), 'utf8').pipe(writeStream, { end: false });
+            createReadStream(join(stylesPath, file.name), 'utf8')
+                .pipe(writeStream, { end: false });
     });
 }
