@@ -68,12 +68,12 @@ async function getComponents() {
 }
 
 function replaceTags(template, componentsMap) {
-    let regex = /{{(.*)}}/g;
+    let regex = /{{([^{{}}]*)}}/g;
 
     template = template.replace(regex, (match, tagName) => {
         let component = componentsMap[tagName];
         if (component !== undefined) return component;
-        else return `<strong> TAG (${tagName}) NOT FOUND! </strong>`;
+        else return `<strong> TAG "${tagName}" NOT FOUND! </strong>`;
     })
     if (regex.test(template)) 
         template = replaceTags(template, componentsMap);
