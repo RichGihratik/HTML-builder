@@ -1,9 +1,9 @@
-const fs = require('fs');
-const { stdin } = require('node:process');
-const path = require('path');
+const { createWriteStream } = require('fs');
+const { stdin, exit } = require('node:process');
+const { join } = require('path');
 
-let writeStream = fs.createWriteStream(
-    path.join(__dirname, 'result.txt'), 
+let writeStream = createWriteStream(
+    join(__dirname, 'result.txt'), 
     'utf8'
 );
 
@@ -14,16 +14,10 @@ stdin.on(
     'data', 
     (data) => {
         code = data
-        if (data.toString('utf8') === 'exit\n') process.exit();
+        if (data.toString('utf8') === 'exit\n') exit();
         writeStream.write(data);
     }
 )
 
-process.on('exit', () => console.log(`Bye!`));
-process.on('SIGINT', exitHandler);
-
-function exitHandler() {
-    process.exit();
-}
-
-
+process.on('exit', () => console.log(`\nBye!`));
+process.on('SIGINT', () => exit());
