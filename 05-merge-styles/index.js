@@ -11,10 +11,10 @@ const bundlePath = join(dist, 'bundle.css');
     let writeStream = createWriteStream(bundlePath, 'utf8');
 
     (await readdir( source, { encoding: "utf8", withFileTypes: true}))
-    .forEach(file => {
-        if (file.isFile() && extname(file.name) === '.css')
-            createReadStream(join(source, file.name), 'utf8')
-                .on('end', () => console.log(`Done! (${file.name})`))
-                .pipe(writeStream, { end: false });
+        .forEach(file => {
+            if (file.isFile() && extname(file.name) === '.css')
+                createReadStream(join(source, file.name), 'utf8')
+                    .on('end', () => console.log(`Done! (${file.name})`))
+                    .pipe(writeStream, { end: false });
     });
 })();
