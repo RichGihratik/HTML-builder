@@ -1,10 +1,6 @@
-const fs = require('fs');
-const { stdin, stdout } = require('node:process');
-const path = require('path');
+const { createReadStream } = require('fs');
+const { stdout } = require('node:process');
+const { join } = require('path');
 
-let readableStream = fs.createReadStream(
-  path.join(__dirname, 'text.txt'),
-  'utf8'
-);
-
+let readableStream = createReadStream(join(__dirname, 'text.txt'), 'utf8');
 readableStream.pipe(stdout);
