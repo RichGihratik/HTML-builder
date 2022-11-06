@@ -1,7 +1,6 @@
 const { createWriteStream, createReadStream } = require('fs');
 const { readdir, readFile, copyFile, mkdir, rm } = require('node:fs/promises');
 const { extname, join, parse } = require('path');
-const { inherits } = require('util');
 
 // CONSTANTS
 // ==============================
