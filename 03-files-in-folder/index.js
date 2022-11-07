@@ -24,5 +24,5 @@ const filePath = join(__dirname, 'secret-folder');
     }
     console.log('List of files: ');
     for (const file of data)
-        console.log(`${file.name} - ${file.ext} - ${file.size.toFixed(2)}kb`);
+        console.log(`${file.name} - ${file.ext} - ${file.size} bytes`);
 })();
