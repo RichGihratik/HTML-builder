@@ -14,7 +14,7 @@ stdin.on(
     'data', 
     (data) => {
         code = data
-        if (data.toString('utf8') === 'exit\n') exit();
+        if (data.toString('utf8').toLowerCase().trim() === 'exit') exit();
         writeStream.write(data);
     }
 )
