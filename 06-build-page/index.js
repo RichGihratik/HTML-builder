@@ -3,7 +3,6 @@ const { readdir, readFile, copyFile, mkdir, rm } = require('node:fs/promises');
 const { extname, join, parse } = require('path');
 
 
-fs.readFile();
 // CONSTANTS
 // ==============================
 
