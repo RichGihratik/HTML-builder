@@ -2,6 +2,8 @@ const { createWriteStream, createReadStream } = require('fs');
 const { readdir, readFile, copyFile, mkdir, rm } = require('node:fs/promises');
 const { extname, join, parse } = require('path');
 
+
+fs.readFile();
 // CONSTANTS
 // ==============================
 
@@ -68,7 +70,7 @@ async function getComponents() {
 }
 
 function replaceTags(template, componentsMap) {
-    let regex = /{{([^{{}}]*)}}/g;
+    let regex = /{{([^{}]*)}}/g;
 
     template = template.replace(regex, (match, tagName) => {
         let component = componentsMap[tagName];
