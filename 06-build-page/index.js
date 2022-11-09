@@ -123,11 +123,18 @@ async function copyAssets() {
 async function bundleCss() {
     console.log('Bundle css...');
     let writeStream = createWriteStream(distCssBundle, 'utf8');
-
+    let streams = [];
     (await readdir( stylesPath, { encoding: "utf8", withFileTypes: true }))
     .forEach(file => {
-        if (file => file.isFile() && extname(file.name) === '.css') 
-            createReadStream(join(stylesPath, file.name), 'utf8')
-                .pipe(writeStream, { end: false });
+        if (file => file.isFile() && extname(file.name) === '.css') {
+            let stream = createReadStream(join(stylesPath, file.name), 'utf8')
+            stream.on('end', () => {
+                    streams.shift();
+                    if (streams.length !== 0) streams[0].pipe(writeStream, { end: false });
+                    console.log(`Done! ${file.name}`);
+            })
+            streams.push(stream);
+        }
     });
+    if (streams.length !== 0) streams[0].pipe(writeStream, { end: false });
 }
