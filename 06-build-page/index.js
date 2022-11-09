@@ -130,6 +130,7 @@ async function bundleCss() {
             let stream = createReadStream(join(stylesPath, file.name), 'utf8')
             stream.on('end', () => {
                     streams.shift();
+                    writeStream.write('\n');
                     if (streams.length !== 0) streams[0].pipe(writeStream, { end: false });
                     console.log(`Done! ${file.name}`);
             })
